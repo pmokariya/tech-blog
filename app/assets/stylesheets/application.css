@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+.page-header{
+	padding: 5px 0;
+}

@@ -1,21 +1,27 @@
 <%= nav_bar fixed: :top, brand: "Technology Blog", responsive: true do %>
 	<%= menu_group do %>
-	    <%= menu_item "Home", posts_path %>
+	    <%= menu_item "Home", posts_path(key:"all") %>
 	    <%= menu_divider %>
-	    <%= drop_down "Products" do %>
-	        <%= menu_item "Things you can't afford", "#" %>
-	        <%= menu_item "Things that won't suit you anyway", "#" %>
-	        <%= menu_item "Things you're not even cool enough to buy anyway", "#" %>
-	    <% end %>
-	    <%= menu_item "About Us", "#" %>
-	    <%= menu_item "Contact", "#" %>
+	    <% if user_signed_in? %>
+		    <%= drop_down "Blogs" do %>
+		        <%= menu_item "My Blogs", posts_path(key:"my_blog") %>
+		        <%= menu_item "Most poplular Blogs", "#" %>
+		        <%= menu_item "New Blogs", "#" %>
+		    <% end %>
+		<% end %>
+	    <%= menu_item "Computer Sci", "#" %>
+	    <%= menu_item "New Technology", "#" %>
+	    <%= menu_item "About Us", home_about_us_path %>
+	    <%= menu_item "Contact", home_contact_path %>
 	<% end %>
 	<%= menu_group pull: :right do %>
-	    <%# if current_user %>
+	    <% if user_signed_in? %>
 	    	<%= menu_item "Create New Blog HERE", new_post_path , style: "color: blue;" %>
-	        <%= menu_item "Log Out", "#" %>
-	    <%# else %>
-	    	<%= menu_item "Sign in", "#" %>
-	    <%# end %>
+	    	<%= menu_item "Signed in as #{current_user.email}", "#" %>
+	        <%= menu_item "Log Out", destroy_user_session_path, :method => :delete %>
+	    <% else %>
+	    	<%= menu_item "Sign up", new_user_registration_path %>
+	    	<%= menu_item "sign in", new_user_session_path %>
+	    <% end %>
 	<% end %>
 <% end %>

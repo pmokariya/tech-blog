@@ -46,14 +46,19 @@
 
     <div><%= image_tag("/assets/chess.jpg" ,width: '50%')%></div>
 
-    <div style="word-break: break-word; font-size: 16px;">
+    <div style="word-break: break-word; font-size: 16px; padding: 10px 0px;">
       <%= post.description %>
     </div>
 
     <div>
       Likes: <%= post.votes_for.size %>
     </div>
-
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_post_path(post), :class => 'btn btn-default btn-xs' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      post_path(post),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
   </div>
-
 <% end %>

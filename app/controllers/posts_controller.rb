@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     if params[:key] == "my_blog"
-      @posts = Post.all.where(user_id: @current_user.id)
+      @posts = Post.all.where(user_id: current_user.id)
     elsif params[:key] == "all"
       @posts = Post.all
     else

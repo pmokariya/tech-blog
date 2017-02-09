@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user! ,except: [:index,:show]
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy,:downvote,:upvote]
 
   # GET /posts
   # GET /posts.json
@@ -71,6 +71,16 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def upvote
+   @post.upvote_by current_user
+   redirect_to @post
+  end
+
+  def downvote
+   @post.downvote_by current_user
+   redirect_to @post
   end
 
   private

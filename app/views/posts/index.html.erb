@@ -51,7 +51,8 @@
     </div>
 
     <div>
-      Likes: <%= post.votes_for.size %>
+      like <%=post.get_upvotes.size%>
+      dislike <%=post.get_downvotes.size%>
     </div>
 
     <% if (user_signed_in?) && (post.user_id == current_user.id) %>

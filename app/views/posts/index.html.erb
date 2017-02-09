@@ -41,7 +41,7 @@
 <% @posts.all.each do |post| %>
   <div>
     <div>
-      <h1><%= post.title %></h1>
+      <h1><%= link_to post.title , post_path(post) %></h1>
     </div>
 
     <div><%= image_tag("/assets/chess.jpg" ,width: '50%')%></div>
@@ -53,12 +53,15 @@
     <div>
       Likes: <%= post.votes_for.size %>
     </div>
-    <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_post_path(post), :class => 'btn btn-default btn-xs' %>
-    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      post_path(post),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
+
+    <% if (user_signed_in?) && (post.user_id == current_user.id) %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_post_path(post), :class => 'btn btn-default btn-xs' %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        post_path(post),
+                        :method => :delete,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-xs btn-danger' %>
+    <% end %>
   </div>
 <% end %>

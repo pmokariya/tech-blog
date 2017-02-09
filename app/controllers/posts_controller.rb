@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user! ,except: [:index]
+  before_action :authenticate_user! ,except: [:index,:show]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
@@ -23,7 +23,9 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @user = current_user
+    @post = @user.posts.new
+    # @post = Post.new
   end
 
   # GET /posts/1/edit
@@ -33,8 +35,9 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
-
+    # @post = Post.new(post_params)
+    @user = current_user
+    @post = @user.posts.new(post_params)
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }

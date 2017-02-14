@@ -50,7 +50,13 @@ group :production do
 end
 
 gem 'twitter-bootstrap-rails'
+
 gem 'acts_as_votable', '~> 0.10.0'
+
 gem "activeadmin", github: "gregbell/active_admin"
+
 gem 'devise'
+
 gem 'jquery-ui-rails', '~> 4.2.1'
+
+gem "paperclip", "~> 5.0.0"

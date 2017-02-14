@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-
   ActiveAdmin.routes(self)
-
-  devise_for :users, controllers: { registrations: 'registrations' }
-  resource :user, only: [:edit,:show] do
-    collection do
-      patch 'update_password'
-    end
-  end
+  devise_for :users
+  # , controllers: { registrations: 'registrations' }
+  resource :user
+  #  do
+  #   # collection do
+  #   #   patch 'update_profile'
+  #   # end
+  # end
   resources :posts do
     resources :comments
     member do
@@ -17,12 +17,9 @@ Rails.application.routes.draw do
       put "dislike", to: "posts#downvote"
     end
   end
-
   get 'home/about_us' => 'home#about_us'
   get 'home/contact' => 'home#contact'
-
   root 'home#index'
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

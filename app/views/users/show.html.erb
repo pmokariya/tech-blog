@@ -1,21 +1,23 @@
-<h2>Profile</h2>
-
-<div class="field">
-  firstname: <%= @user.firstname %><br />
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
-<div class="field">
-  lastname: <%= @user.lastname %><br />
-</div>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @user.email %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:firstname) %>:</strong></dt>
+  <dd><%= @user.firstname %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:lastname) %>:</strong></dt>
+  <dd><%= @user.lastname %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:username) %>:</strong></dt>
+  <dd><%= @user.username %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:birthdate) %>:</strong></dt>
+  <dd><%= @user.birthdate %></dd>
+</dl>
 
-<div class="field">
-  username: <%= @user.username %><br />
-</div>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              root_path, :class => 'btn btn-default'  %>
 
-<div class="field">
-  email: <%= @user.email %><br />
-</div>
-
-<div class="field">
-  birthdate: <%= @user.birthdate %><br />
-</div>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_user_path(@user), :class => 'btn btn-default' %>

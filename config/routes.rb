@@ -4,8 +4,12 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  devise_for :users
-
+  devise_for :users, controllers: { registrations: 'registrations' }
+  resource :user, only: [:edit] do
+    collection do
+      patch 'update_password'
+    end
+  end
   resources :posts do
     resources :comments
     member do

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   devise_for :users, controllers: { registrations: 'registrations' }
-  resource :user, only: [:edit] do
+  resource :user, only: [:edit,:show] do
     collection do
       patch 'update_password'
     end

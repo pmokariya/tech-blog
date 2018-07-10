@@ -7,15 +7,4 @@ jobs:
       - checkout
       - run: echo "A first hello"
 
-database:
-  override:
-    - bundle exec rake db:create db:schema:load db:seed --trace
 
-deployment:
- production:
-    branch: master
-    commands:
-      - git fetch origin --unshallow
-      - git push git@heroku.com:tech-blog.git $CIRCLE_SHA1:master
-      - heroku run rake db:migrate --app tech-blog
-      - heroku restart --app tech-blog
